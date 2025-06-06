@@ -63,7 +63,7 @@ vim.diagnostic.config(diagnostic_config, config.ERROR_NS)
 
 -- Capture the last terminal buffer
 _G.codecompanion_last_terminal = nil
-api.nvim_create_autocmd("TermEnter", {
+api.nvim_create_autocmd("BufEnter", {
   desc = "Capture the last terminal buffer",
   callback = function()
     local bufnr = api.nvim_get_current_buf()
