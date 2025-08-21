@@ -19,8 +19,7 @@ function Tools:format(message, opts, state)
 
   if state.has_reasoning_output then
     state:mark_reasoning_complete()
-    table.insert(lines, "")
-    table.insert(lines, "")
+    self:add_spacing(lines, 2)
     table.insert(lines, "### Response")
   end
 
@@ -32,10 +31,7 @@ function Tools:format(message, opts, state)
   end
 
   local content_start = #lines + 1
-  local content = message.content or ""
-  for _, line in ipairs(vim.split(content, "\n", { plain = true, trimempty = false })) do
-    table.insert(lines, line)
-  end
+  vim.list_extend(lines, self:split_content(message.content, false))
   table.insert(lines, "")
 
   if not config.strategies.chat.tools.opts.folds.enabled then

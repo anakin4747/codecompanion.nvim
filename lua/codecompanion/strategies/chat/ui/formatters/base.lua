@@ -1,17 +1,11 @@
-local log = require("codecompanion.utils.log")
-
 ---@class CodeCompanion.Chat.UI.Formatters.Base
 ---@field chat CodeCompanion.Chat
----@field is_new_response boolean
----@field last_tag? string
 ---@field __class string
 local BaseFormatter = {}
 BaseFormatter.__class = "BaseFormatter"
 
 ---@class CodeCompanion.Chat.UI.Formatters.BaseArgs
 ---@field chat CodeCompanion.Chat
----@field is_new_response boolean
----@field last_tag? string
 
 ---@param chat CodeCompanion.Chat
 function BaseFormatter:new(chat)
@@ -46,6 +40,27 @@ end
 ---@return table lines, table? fold_info
 function BaseFormatter:format(message, opts, state)
   error("Must implement format method")
+end
+
+---Helper method to split content into lines
+---@param content string
+---@param trim_empty? boolean
+---@return table
+function BaseFormatter:split_content(content, trim_empty)
+  if trim_empty == nil then
+    trim_empty = false
+  end
+  return vim.split(content or "", "\n", { plain = true, trimempty = trim_empty })
+end
+
+---Helper method to add spacing
+---@param lines table
+---@param count? integer
+function BaseFormatter:add_spacing(lines, count)
+  count = count or 1
+  for _ = 1, count do
+    table.insert(lines, "")
+  end
 end
 
 return BaseFormatter

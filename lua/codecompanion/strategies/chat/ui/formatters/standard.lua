@@ -19,16 +19,13 @@ function Standard:format(message, opts, state)
   -- Handle transition from reasoning to response using rich state
   if state.has_reasoning_output then
     state:mark_reasoning_complete()
-    table.insert(lines, "")
-    table.insert(lines, "")
+    self:add_spacing(lines, 2)
     table.insert(lines, "### Response")
     table.insert(lines, "")
   end
 
-  -- Add content
-  for _, line in ipairs(vim.split(message.content, "\n", { plain = true, trimempty = false })) do
-    table.insert(lines, line)
-  end
+  -- Add content using helper method
+  vim.list_extend(lines, self:split_content(message.content, false))
 
   return lines, nil
 end

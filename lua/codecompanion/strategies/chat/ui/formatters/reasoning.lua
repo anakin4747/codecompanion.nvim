@@ -22,10 +22,8 @@ function Reasoning:format(message, opts, state)
     state:mark_reasoning_started()
   end
 
-  -- Add reasoning content
-  for _, line in ipairs(vim.split(message.content, "\n", { plain = true, trimempty = false })) do
-    table.insert(lines, line)
-  end
+  -- Add reasoning content using helper method
+  vim.list_extend(lines, self:split_content(message.content, false))
 
   return lines, nil
 end
