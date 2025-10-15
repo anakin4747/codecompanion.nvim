@@ -1,5 +1,12 @@
 # Changelog
 
+## [16.1.0](https://github.com/anakin4747/codecompanion.nvim/compare/v16.0.0...v16.1.0) (2025-10-15)
+
+
+### Features
+
+* **events:** set last_terminal on BufEnter ([b7ecf26](https://github.com/anakin4747/codecompanion.nvim/commit/b7ecf2668223b10fe8dd286b1b82c1bb1991e8cb))
+
 ## [16.0.0](https://github.com/olimorris/codecompanion.nvim/compare/v15.12.0...v16.0.0) (2025-06-06)
 
 
